@@ -2,20 +2,28 @@ version: '3.1'
 
 services:
   app:
-    container_name: cbc-postgresql
-    image: cbc-postgresql-post
+    container_name: bcb-postgresql
+    image: bcb-postgresql-post
     build: ./
     ports:
       - "8080:8080"
     depends_on:
       - postgresqldb
+    networks:
+      - spring-postgres
   postgresqldb:
+    restart: always
     image: postgres
     ports:
       - "5432:5432"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./create.sql:/docker-entrypoint-createdb.d/create.sql
     environment:
       - POSTGRES_PASSWORD=123456
       - POSTGRES_USER=postgres
-      - POSTGRES_DB=bcb
+      - POSTGRES_DB=bigchatbrasil
+    networks:
+      - spring-postgres
+networks:
+  spring-postgres:
