@@ -23,7 +23,7 @@ spring:
           filters:
             - SetPath=/account/find-all
 
-twilio.id: AC76c817e1692a9b1d7fd83ddae470087b
-twilio.token: null
+service.id: AC76c817e1692a9b1d7fd83ddae470087b
+service.token: e54866915fbf75a5331e6956eb58e827
 
 

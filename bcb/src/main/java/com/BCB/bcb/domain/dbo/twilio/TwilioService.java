@@ -26,7 +26,7 @@ public class TwilioService {
     }
 
     public Message sendMessageWhats(BaseMessageDTO dto) {
-        Twilio.init(environment.getProperty("twilio.id"), environment.getProperty("twilio.token"));
+        Twilio.init(environment.getProperty("service.id"), environment.getProperty("service.token"));
 
         Message message = Message.creator(
                 new com.twilio.type.PhoneNumber("whatsapp:" + dto.getNumber()),
@@ -37,7 +37,7 @@ public class TwilioService {
     }
 
     public Message sendMessageSms(BaseMessageDTO dto) {
-        Twilio.init(environment.getProperty("twilio.id"), environment.getProperty("twilio.token"));
+        Twilio.init(environment.getProperty("service.id"), environment.getProperty("service.token"));
 
         Message message = Message.creator(
                 new com.twilio.type.PhoneNumber(dto.getNumber()),
