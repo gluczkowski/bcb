@@ -1,0 +1,29 @@
+spring:
+  profiles:
+    active: ${APP_PROFILE:dev}    
+  cloud:
+    gateway:
+      routes:
+        - id: person
+          uri: http://localhost:8080
+          predicates:
+            - Path=/person
+          filters:
+            - SetPath=/client-person/find-all
+        - id: company
+          uri: http://localhost:8080
+          predicates:
+            - Path=/company
+          filters:
+            - SetPath=/client-company/find-all
+        - id: accounts
+          uri: http://localhost:8080
+          predicates:
+            - Path=/accounts
+          filters:
+            - SetPath=/account/find-all
+
+twilio.id: AC76c817e1692a9b1d7fd83ddae470087b
+twilio.token: null
+
+
