@@ -9,7 +9,9 @@ Foi utilizado api da twilio para disparo da mensagem.
 
 Tecnologia utilizada: Java versão 11. Springboot 2.7.14. Banco h2 para perfil test, Banco Postgre para o perfil Dev. Lombok e hibernate validator. Docker.
 
-será necessário alterar o token da twilio, pois sempre que subia ele na aplicação a twilio acabava mudando meu token por questão de segurança. no arquivo application.properties setar a variavel servico.token com este valor : 23fe26c3cc0dd09a5cdfd2b2fa7b7bcd
+será necessário alterar o token da twilio, pois sempre que subia ele na aplicação a twilio acabava mudando meu token por questão de segurança. no arquivo 
+application.properties setar a variavel servico.token com este valor : 23fe26c3cc0dd09a5cdfd2b2fa7b7bcd
+Navegar para a pasta bcb: cd .\bcb\
 Para iniciar o projeto será necessário atualizar o .jar, devido a alteração do token, basta utilizar o comando : mvn clean install -DskipTests=true 
 em seguida : docker-compose up
 

@@ -112,7 +112,7 @@ public class ClientCompanyService {
     private Boolean checkIfClientHaveEnoughCredit(ClientCompany client) {
         if (client.getAccount().getCredit().compareTo(MESSAGE_VALUE) >= 0) {
             client.getAccount().setCredit(client.getAccount().getCredit().subtract(MESSAGE_VALUE));
-            repository.save(client);
+            accountService.save(client.getAccount());
             return true;
         }
         return false;
@@ -121,7 +121,7 @@ public class ClientCompanyService {
     private Boolean checkIfThereIsLimit(ClientCompany client) {
         client.getAccount().setBalance(client.getAccount().getBalance().add(MESSAGE_VALUE));
         if (client.getAccount().getBalance().compareTo(client.getAccount().getLimit()) <= 0) {
-            this.repository.save(client);
+            accountService.save(client.getAccount());
             return true;
         }
         return false;

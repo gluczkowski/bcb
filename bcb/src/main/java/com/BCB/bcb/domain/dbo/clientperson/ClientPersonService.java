@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.BCB.bcb.domain.dbo.account.Account;
 import com.BCB.bcb.domain.dbo.account.AccountService;
@@ -112,16 +113,17 @@ public class ClientPersonService {
     private Boolean checkIfClientHaveEnoughCredit(ClientPerson client) {
         if (client.getAccount().getCredit().compareTo(MESSAGE_VALUE) >= 0) {
             client.getAccount().setCredit(client.getAccount().getCredit().subtract(MESSAGE_VALUE));
-            repository.save(client);
+            accountService.save(client.getAccount());
             return true;
         }
         return false;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     private Boolean checkIfThereIsLimit(ClientPerson client) {
         client.getAccount().setBalance(client.getAccount().getBalance().add(MESSAGE_VALUE));
         if (client.getAccount().getBalance().compareTo(client.getAccount().getLimit()) <= 0) {
-            this.repository.save(client);
+            accountService.save(client.getAccount());
             return true;
         }
         return false;
