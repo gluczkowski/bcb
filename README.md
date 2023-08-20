@@ -9,7 +9,9 @@ Foi utilizado api da twilio para disparo da mensagem.
 
 Tecnologia utilizada: Java versão 11. Springboot 2.7.14. Banco h2 para perfil test, Banco Postgre para o perfil Dev. Lombok e hibernate validator. Docker.
 
-Para iniciar o projeto basta utilizar o comando : docker-compose up
+será necessário alterar o token da twilio, pois sempre que subia ele na aplicação a twilio acabava mudando meu token por questão de segurança. no arquivo application.properties setar a variavel servico.token com este valor : 23fe26c3cc0dd09a5cdfd2b2fa7b7bcd
+Para iniciar o projeto será necessário atualizar o .jar, devido a alteração do token, basta utilizar o comando : mvn clean install -DskipTests=true 
+em seguida : docker-compose up
 
 Tem essa mini documentação(com postman) já com os endpoints inseridos :
 https://warped-desert-770734.postman.co/workspace/Happy~cc7fedc1-1878-4747-80c7-6c0ec63f3822/collection/16448283-2126a574-3af3-4031-9588-41b28ed193b8?action=share&creator=16448283
