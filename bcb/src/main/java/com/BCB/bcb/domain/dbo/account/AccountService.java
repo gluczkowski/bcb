@@ -18,7 +18,7 @@ import com.BCB.bcb.domain.dbo.clientperson.dtos.ClientPersonDTO;
 
 @Service
 public class AccountService {
-    private static BigDecimal MESSAGE_VALUE = new BigDecimal(0.25);
+    
     private final AccountRepository accountRepository;
     private final ModelMapper modelMapper;
 
@@ -77,22 +77,22 @@ public class AccountService {
     }
 
     public void refoundPre(ClientPerson client) {
-        client.getAccount().getCredit().add(MESSAGE_VALUE);
+        client.getAccount().getCredit().add(BigDecimal.valueOf(0.25));
         accountRepository.save(client.getAccount());
     }
 
     public void refoundPos(ClientPerson client) {
-        client.getAccount().getBalance().subtract(MESSAGE_VALUE);
+        client.getAccount().getBalance().subtract(BigDecimal.valueOf(0.25));
         accountRepository.save(client.getAccount());
     }
 
     public void refoundPre(ClientCompany client) {
-        client.getAccount().getCredit().add(MESSAGE_VALUE);
+        client.getAccount().getCredit().add(BigDecimal.valueOf(0.25));
         accountRepository.save(client.getAccount());
     }
 
     public void refoundPos(ClientCompany client) {
-        client.getAccount().getBalance().subtract(MESSAGE_VALUE);
+        client.getAccount().setBalance(client.getAccount().getBalance().subtract(BigDecimal.valueOf(0.25)));
         accountRepository.save(client.getAccount());
     }
 

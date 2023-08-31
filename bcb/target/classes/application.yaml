@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: ${APP_PROFILE:dev}    
+    active: ${APP_PROFILE:test}    
   cloud:
     gateway:
       routes:
@@ -24,6 +24,6 @@ spring:
             - SetPath=/account/find-all
 
 service.id: AC76c817e1692a9b1d7fd83ddae470087b
-service.token: e54866915fbf75a5331e6956eb58e827
+service.token: 23fe26c3cc0dd09a5cdfd2b2fa7b7bcd
 
 
