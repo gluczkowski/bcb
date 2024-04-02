@@ -2,6 +2,7 @@ package com.BCB.bcb.domain.dbo.account;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -54,7 +55,7 @@ public class AccountServiceTest {
         when(modelMapper.map(account, AccountDTO.class)).thenReturn(expectedDTO);
         AccountDTO resultDTO = accountService.save(account);
 
-        verify(accountRepository).save(account);
+        verify(accountRepository, times(1)).save(account);
         assertEquals(expectedDTO, resultDTO);
     }
 
@@ -72,7 +73,7 @@ public class AccountServiceTest {
 
         verify(accountRepository).save(account);
 
-        assertEquals(BigDecimal.valueOf(100).subtract(BigDecimal.valueOf(0.25)), account.getBalance());
+        assertEquals(BigDecimal.valueOf(99.75), account.getBalance());
     }
 
 }
