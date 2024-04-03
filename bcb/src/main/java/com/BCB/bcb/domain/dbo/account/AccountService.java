@@ -35,12 +35,12 @@ public class AccountService {
         accountRepository.save(person.getAccount());
     }
 
-    public void updateAccount(ClientCompany person, ClientCompanyDTO dto) {
-        person.getAccount().setCredit(dto.getAccount().getCredit());
-        person.getAccount().setLimit(dto.getAccount().getLimit());
-        person.getAccount().setBalance(dto.getAccount().getBalance());
-        person.getAccount().setTypeAccount(dto.getAccount().getTypeAccount());
-        accountRepository.save(person.getAccount());
+    public void updateAccount(ClientCompany company, ClientCompanyDTO dto) {
+        company.getAccount().setCredit(dto.getAccount().getCredit());
+        company.getAccount().setLimit(dto.getAccount().getLimit());
+        company.getAccount().setBalance(dto.getAccount().getBalance());
+        company.getAccount().setTypeAccount(dto.getAccount().getTypeAccount());
+        accountRepository.save(company.getAccount());
     }
 
     public AccountDTO save(Account account) {
@@ -48,13 +48,13 @@ public class AccountService {
     }
 
     public AccountDTO getClientAccount(Integer id) {
-        Account account = this.accountRepository.findById(id)
+        Account account = accountRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Account not found"));
         return modelMapper.map(account, AccountDTO.class);
     }
 
     public AccountDTO updateAccount(AccountDTO dto) {
-        Account account = this.accountRepository.findById(dto.getId())
+        Account account = accountRepository.findById(dto.getId())
                 .orElseThrow(() -> new NoSuchElementException("Account not found"));
 
         account.setCredit(dto.getCredit() != null ? dto.getCredit() : null);
@@ -62,11 +62,11 @@ public class AccountService {
         account.setBalance(dto.getBalance() != null ? dto.getBalance() : null);
         account.setTypeAccount(dto.getTypeAccount() != null ? dto.getTypeAccount() : null);
 
-        return modelMapper.map(this.accountRepository.save(account), AccountDTO.class);
+        return modelMapper.map(accountRepository.save(account), AccountDTO.class);
     }
 
     public List<AccountDTO> findAllAccounts() {
-        List<Account> clients = this.accountRepository.findAll();
+        List<Account> clients = accountRepository.findAll();
         return clients.stream().map(client -> modelMapper.map(client, AccountDTO.class))
                 .collect(Collectors.toList());
     }
@@ -77,17 +77,17 @@ public class AccountService {
     }
 
     public void refoundPre(ClientPerson client) {
-        client.getAccount().getCredit().add(BigDecimal.valueOf(0.25));
+        client.getAccount().setCredit(client.getAccount().getCredit().add(BigDecimal.valueOf(0.25)));
         accountRepository.save(client.getAccount());
     }
 
     public void refoundPos(ClientPerson client) {
-        client.getAccount().getBalance().subtract(BigDecimal.valueOf(0.25));
+        client.getAccount().setBalance(client.getAccount().getBalance().subtract(BigDecimal.valueOf(0.25)));
         accountRepository.save(client.getAccount());
     }
 
     public void refoundPre(ClientCompany client) {
-        client.getAccount().getCredit().add(BigDecimal.valueOf(0.25));
+        client.getAccount().setCredit(client.getAccount().getCredit().add(BigDecimal.valueOf(0.25)));
         accountRepository.save(client.getAccount());
     }
 
